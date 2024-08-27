@@ -11,7 +11,7 @@
 # ---- Libraries, functions and working directory: ----
 # ----------------------------------------------------- #
 # Working directory:
-setwd("Your Path/ALEdifferences/")
+setwd("Your Path/StaerkEtal2024ALEdifferences-main/")
 
 # Libraries and functions:
 source("01code/ALEdifferencesFunctions.R")
@@ -29,15 +29,18 @@ thetaMat <- read.csv(file = "02data/tables/SilerParamsFromMatur.csv",
 
 # Load estimated ALE differences:
 leDiff <- read.csv(file = "02data/tables/ALEdifferences.csv",
-                  header = TRUE, stringsAsFactors = FALSE)
+                   header = TRUE, stringsAsFactors = FALSE)
 
 # Load data for BPGLS:
 pglsDat <- read.csv(file = "02data/tables/PLGSdata.csv",
-                  header = TRUE, stringsAsFactors = FALSE)
+                    header = TRUE, stringsAsFactors = FALSE)
 
 # Test data for BaSTA analysis:
 survDat <- read.csv(file = "02data/tables/indivTestDat.csv",
                     header = TRUE, stringsAsFactors = FALSE)
+
+# Load phylogeny:
+load("02data/rdata/fullphylo.RData")
 
 # -------------------------- #
 # ---- Other variables: ----
@@ -80,7 +83,7 @@ legend("topright", legend = sexes, lwd = 4, col = sexCol, bty = 'n')
 # ==== AGE-SPECIFIC SURVIVAL ANALYSIS: ====
 # ========================================= #
 # Find life history data for chosen species:
-idSps <- which(pglsDat$Species == species)
+idSps <- which(pglsDat$species == species)
 
 # Find age at maturity:
 alpha <- floor(max(c(pglsDat$FemaleAFB[idSps], pglsDat$MaleAFB[idSps])))
