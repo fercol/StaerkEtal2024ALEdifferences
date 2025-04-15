@@ -8,3 +8,4 @@ Here we provide code, data and a tutorial showing how the analyses for the study
   - ***tables***: with five data files described in the tutorial.
 - **03turorial**: with the file ***ALEdifferencesTutorial.pdf*** with a step by step tutorial explaining the code in ***01code/ALEdifferencesCode.R***.
 
+The current release is available at the Zenodo repository [![DOI](https://zenodo.org/badge/848168511.svg)](https://doi.org/10.5281/zenodo.15183248)
