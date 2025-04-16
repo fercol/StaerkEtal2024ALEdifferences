@@ -32,7 +32,7 @@ leDiff <- read.csv(file = "02data/tables/ALEdifferences.csv",
                    header = TRUE, stringsAsFactors = FALSE)
 
 # Load data for BPGLS:
-pglsDat <- read.csv(file = "02data/tables/PLGSdata.csv",
+pglsDat <- read.csv(file = "02data/tables/PGLSdata.csv",
                     header = TRUE, stringsAsFactors = FALSE)
 
 # Test data for BaSTA analysis:
@@ -114,20 +114,40 @@ print(quants)
 # ================================================ #
 # ==== EVOLUTIONARY PREDICTORS OF ALE DIFFS.: ====
 # ================================================ #
-# Subset data to only include Artiodactyls:
+# --------------------------- #
+# ---- Test on all data: ----
+# --------------------------- #
+# Example with cost of reproduction:
+
+# Run BPGLS (note that this may take around one hour):
+outPGLSclass <- RunBayesPGLS(formula = exDiff ~ Class + log(MaleBM) + 
+                               log(FemaleBM) + Monogamy, data = pglsDat, 
+                             weights = "weights", phylo = fullphylo, 
+                             ncpus = 6, nsim = 6)
+
+# Print summary:
+outPGLSclass
+
+# Plot parameter posterior densities:
+plot(outPGLSclass, plot.type = "density")
+
+# ------------------------------- #
+# ---- Test on single order: ----
+# ------------------------------- #
+# Subset data to only include Artiodactyls (for faster computing):
 idOrder <- which(pglsDat$Order == "Artiodactyla")
 pglsDatOrder <- pglsDat[idOrder, ]
 
 # Run BPGLS:
-outpgls <- RunBayesPGLS(formula = exDiff ~ log(MaleBM) + log(FemaleBM) + MS, 
-                        data = pglsDatOrder, weights = "weights",
+outPGLSorder <- RunBayesPGLS(formula = exDiff ~ log(MaleBM) + log(FemaleBM) + 
+                          Monogamy, data = pglsDatOrder, weights = "weights",
                         phylo = fullphylo, ncpus = 6, nsim = 6)
 
 # Print summary:
-outpgls
+outPGLSorder
 
 # Plot parameter posterior densities:
-plot(outpgls, plot.type = "density")
+plot(outPGLSorder, plot.type = "density")
 
 # ============================================ #
 # ==== EFFECT OF ALLOMETRY ON REGRESSION: ==== 

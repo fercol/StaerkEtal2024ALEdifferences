@@ -20,15 +20,21 @@
 # Vector of installed packages:
 instPacks <- installed.packages()[, 1]
 
+# Install and load 'devtools':
+if (!"devtools" %in% instPacks) {
+  install.packages("devtools")
+}
+library(devtools)
+
 # snowfall for parallel computing:
 if (!"snowfall" %in% instPacks) {
   install.packages("snowfall")
 }
 library(snowfall)
 
-# Install and load 'BaSTA':
+# Install and load latest version of 'BaSTA':
 if (!"BaSTA" %in% instPacks) {
-  install.packages("BaSTA")
+  install_git("https://github.com/fercol/basta2.0", subdir = "pkg/")
 }
 library(BaSTA)
 
@@ -37,12 +43,6 @@ if (!"paramDemo" %in% instPacks) {
   install.packages("paramDemo")
 }
 library(paramDemo)
-
-# Install and load 'devtools':
-if (!"devtools" %in% instPacks) {
-  install.packages("devtools")
-}
-library(devtools)
 
 # Install and load 'BayesPGLS':
 if (!"BayesPGLS" %in% instPacks) {
